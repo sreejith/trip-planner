@@ -1,0 +1,78 @@
+.example-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+
+.example-card {
+  max-width: 840px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.time-table {
+  width: 100%;
+}
+
+.btn-margin-right {
+  margin-right: 5px;
+}
+
+.mat-column-slNo {
+  width: 32px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-departureDate {
+  width: 115px;
+  text-align: center;
+}
+
+.mat-column-from {
+  width: 115px;
+}
+
+.mat-column-to {
+  width: 115px;
+}
+
+.img-wrap {
+  position: relative;
+  height: calc(100vh - 70px);
+}
+
+.img-wrap:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.05;
+  background-image: url('../../../assets/images/map-bg.png');
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  background-size: cover;
+}
+
+.img-content {
+  position: relative;
+  height: calc(100vh - 70px);
+}
+

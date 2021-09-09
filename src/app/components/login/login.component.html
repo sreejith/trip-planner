@@ -1,0 +1,44 @@
+<div class="jumbotron jumbotron-fluid jmp">
+  <div class="container">
+    <h1 class="display-4">Trip planner</h1>
+    <p class="lead">Enjoy your freedom of travel here!</p>
+  </div>
+</div>
+<div style="height: 100%;" class="login-img-wrap">
+  <div class="parent-div login-img-content">
+    <mat-toolbar color="primary" class="login-toolbar-heading" style="background: #1d69b4;">
+      <span>Login</span>
+    </mat-toolbar>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-card class="example-card">
+        <mat-card-content>
+          <mat-error *ngIf="isCredentialsInvalid">
+            The username and password were not recognized
+          </mat-error>
+          <mat-form-field class="full-width-input">
+            <input matInput placeholder="Username" formControlName="username" required>
+            <mat-error>
+              Please provide a valid username
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width-input">
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password" required>
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error>
+              Please provide a valid password
+            </mat-error>
+          </mat-form-field>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <button mat-stroked-button color="primary" class="login-button">Login</button>
+        </mat-card-actions>
+        <mat-card-footer *ngIf="validationInprogress">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </mat-card-footer>
+      </mat-card>
+    </form>
+  </div>
+</div>

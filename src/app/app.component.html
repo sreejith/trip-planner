@@ -1,0 +1,8 @@
+<nav class="navbar navbar-light" style="background-color: #1d69b4;" *ngIf="authenticationService.isAuthenticated">
+  <a class="navbar-brand" style="color: #fff;">Trip planner - plan your trip here!</a>
+  <form class="form-inline">
+    <button mat-stroked-button style="background-color: #fff;" (click)="logout()">Logout</button>
+  </form>
+</nav>
+
+<router-outlet></router-outlet>
