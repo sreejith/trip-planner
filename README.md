@@ -1,7 +1,7 @@
 # Credentials to use
 
-Username: admin
-Password: admin
+Username: `admin`
+Password: `admin`
 
 # TripPlanner
 
