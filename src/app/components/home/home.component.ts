@@ -68,6 +68,8 @@ export class HomeComponent implements OnInit {
   toStationVal: any;
   dateVal: any;
 
+  filterObj: any;
+
   timetableData = new MatTableDataSource(ELEMENT_DATA);
 
   displayedColumns: string[] = ['slNo', 'departureDate', 'from', 'to', 'departureTime'];
@@ -96,6 +98,19 @@ export class HomeComponent implements OnInit {
         map(station => station ? this._filter(station) : this.optionArr.slice())
       );
 
+    this.timetableData.filterPredicate = (data: any, filter: any) => {
+      if(data[this.filterObj['key']] && this.filterObj['key']) {
+          if(this.fromStationVal != undefined && this.toStationVal != undefined && this.dateVal != undefined) {
+            return data['fromStation'].toLowerCase().includes(this.fromStationVal) &&
+                   data['toStation'].toLowerCase().includes(this.toStationVal) &&
+                   data['departureDate'].toLowerCase().includes(this.dateVal);
+          } else {
+            return data[this.filterObj['key']].toLowerCase().includes(this.filterObj['value']);
+          }
+      }
+      return false;
+    }
+
   }
 
   displayFn(station: Station): string {
@@ -110,14 +125,28 @@ export class HomeComponent implements OnInit {
 
   onSelectionChange(value: any, eventFrom: string) {
 
-    if(eventFrom === 'station') {
-      this.fromStationVal = this.form.get('fromStation')?.value.station;
-      this.toStationVal = this.form.get('toStation')?.value.station;
+    if(eventFrom === 'fromStation') {
+      this.fromStationVal = this.form.get('fromStation')?.value.station.trim().toLowerCase();
+      this.filterObj = {
+        value: value.station.trim().toLowerCase(),
+        key: 'fromStation'
+      }
+      this.timetableData.filter = value.station.trim().toLowerCase();
+    } else if(eventFrom === 'toStation') {
+      this.toStationVal = this.form.get('toStation')?.value.station.trim().toLowerCase();
+      this.filterObj = {
+        value: value.station.trim().toLowerCase(),
+        key: 'toStation'
+      }
       this.timetableData.filter = value.station.trim().toLowerCase();
     } else if(eventFrom === 'depDate') {
+      this.dateVal = (this.datePipe.transform(value, 'dd/MM/yyyy'))?.trim().toLowerCase();
       let date = this.datePipe.transform(value, 'dd/MM/yyyy');
       if(date != null) {
-        this.dateVal = this.datePipe.transform(value, 'dd/MM/yyyy');
+        this.filterObj = {
+          value: date.trim().toLowerCase(),
+          key: 'departureDate'
+        }
         this.timetableData.filter = date.trim().toLowerCase();
       }
     }
